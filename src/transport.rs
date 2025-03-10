@@ -266,8 +266,13 @@ impl TcpMessageBus {
             IncomingMessages::Error => {
                 let request_id = message.peek_int(2).unwrap_or(-1);
 
-                if request_id == UNSPECIFIED_REQUEST_ID {
-                    error_event(server_version, message).unwrap();
+                let is_warning = match message.peek_int(3) {
+                    Ok(error_code) => 2100 <= error_code && error_code < 2200,
+                    Err(_) => false,
+                };
+
+                if request_id == UNSPECIFIED_REQUEST_ID || is_warning {
+                    error_event(server_version, message).unwrap()
                 } else {
                     self.process_response(message);
                 }
