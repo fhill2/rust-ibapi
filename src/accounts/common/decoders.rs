@@ -18,7 +18,7 @@ pub(crate) fn decode_position(message: &mut ResponseMessage) -> Result<Position,
 
     position.contract.contract_id = message.next_int()?;
     position.contract.symbol = message.next_string()?;
-    position.contract.security_type = SecurityType::from(&message.next_string()?);
+    position.contract.security_type = SecurityType::from(message.next_string()?);
     position.contract.last_trade_date_or_contract_month = message.next_string()?;
     position.contract.strike = message.next_double()?;
     position.contract.right = message.next_string()?;
@@ -52,7 +52,7 @@ pub(crate) fn decode_position_multi(message: &mut ResponseMessage) -> Result<Pos
 
     position.contract.contract_id = message.next_int()?;
     position.contract.symbol = message.next_string()?;
-    position.contract.security_type = SecurityType::from(&message.next_string()?);
+    position.contract.security_type = SecurityType::from(message.next_string()?);
     position.contract.last_trade_date_or_contract_month = message.next_string()?;
     position.contract.strike = message.next_double()?;
     position.contract.right = message.next_string()?;
@@ -175,7 +175,7 @@ pub(crate) fn decode_account_portfolio_value(server_version: i32, message: &mut 
         contract.contract_id = message.next_int()?;
     }
     contract.symbol = message.next_string()?;
-    contract.security_type = SecurityType::from(&message.next_string()?);
+    contract.security_type = SecurityType::from(message.next_string()?);
     contract.last_trade_date_or_contract_month = message.next_string()?;
     contract.strike = message.next_double()?;
     contract.right = message.next_string()?;

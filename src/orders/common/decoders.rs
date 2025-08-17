@@ -49,7 +49,7 @@ impl OrderDecoder {
         contract.symbol = message.next_string()?;
 
         let security_type = message.next_string()?;
-        contract.security_type = SecurityType::from(&security_type);
+        contract.security_type = SecurityType::from(security_type);
 
         contract.last_trade_date_or_contract_month = message.next_string()?;
         contract.strike = message.next_double()?;
@@ -773,7 +773,7 @@ pub(crate) fn decode_execution_data(server_version: i32, message: &mut ResponseM
     contract.contract_id = message.next_int()?;
     contract.symbol = message.next_string()?;
     let secutity_type = message.next_string()?;
-    contract.security_type = SecurityType::from(&secutity_type);
+    contract.security_type = SecurityType::from(secutity_type);
     contract.last_trade_date_or_contract_month = message.next_string()?;
     contract.strike = message.next_double()?;
     contract.right = message.next_string()?;

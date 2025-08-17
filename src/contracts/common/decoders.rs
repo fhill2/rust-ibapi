@@ -18,7 +18,7 @@ pub(in crate::contracts) fn decode_contract_details(server_version: i32, message
     let mut contract = ContractDetails::default();
 
     contract.contract.symbol = message.next_string()?;
-    contract.contract.security_type = SecurityType::from(&message.next_string()?);
+    contract.contract.security_type = SecurityType::from(message.next_string()?);
     read_last_trade_date(&mut contract, &message.next_string()?, false)?;
     contract.contract.strike = message.next_double()?;
     contract.contract.right = message.next_string()?;
@@ -151,7 +151,7 @@ pub(in crate::contracts) fn decode_contract_descriptions(
         let mut contract = Contract {
             contract_id: message.next_int()?,
             symbol: message.next_string()?,
-            security_type: SecurityType::from(&message.next_string()?),
+            security_type: SecurityType::from(message.next_string()?),
             primary_exchange: message.next_string()?,
             currency: message.next_string()?,
             ..Default::default()

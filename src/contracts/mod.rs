@@ -102,8 +102,8 @@ impl std::fmt::Display for SecurityType {
     }
 }
 
-impl SecurityType {
-    pub fn from(name: &str) -> SecurityType {
+impl From<&str> for SecurityType {
+    fn from(name: &str) -> SecurityType {
         match name {
             "STK" => SecurityType::Stock,
             "OPT" => SecurityType::Option,
@@ -124,6 +124,11 @@ impl SecurityType {
                 SecurityType::Other(other.to_string())
             }
         }
+    }
+}
+impl From<String> for SecurityType {
+    fn from(name: String) -> SecurityType {
+        Self::from(name.as_str())
     }
 }
 
